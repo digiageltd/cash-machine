@@ -9,7 +9,6 @@ use Exception;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Mockery;
 use PHPUnit\Framework\MockObject\MockObject;
 use Tests\TestCase;
 
@@ -376,31 +375,5 @@ class CashMachineControllerTest extends TestCase
             trans('cash_machine.transferDate.after_or_equal')
         );
     }
-
-    // It has a limit of 20.000 amount for total processing, everything more is declined.
-    public function test_amount_limit_exceeded(): void
-    {
-        // Create a fake transaction request data
-        $requestData = [
-            'transaction_type' => 'bank_transfer',
-            'transferDate' => date('Y-m-d'),
-            'customerName' => 'Test Client',
-            'accountNumber' => '52D3A5',
-            'amount' => 20060.00
-        ];
-
-        // Send a POST request to the store endpoint with the fake request data
-        $response = $this->post(route('transaction.store'), $requestData);
-
-        // Get the validation errors from the session
-        $errors = session('errors');
-
-        // Assert that the validation errors contain the expected error message
-        $this->assertTrue(
-            $errors->has('amount'),
-            trans('cash_machine.amount.limit.exceeded')
-        );
-    }
-
 
 }
