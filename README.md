@@ -7,7 +7,7 @@
 - Run "npm install"
 - Run "npm run build"
 - Run "php artisan migrate"
-- You can not run the project using "php artisan serve" and then open the project on url (typically) http://127.0.0.1:8000
+- You can now run the project using "php artisan serve" and then open the project on url (typically) http://127.0.0.1:8000
 - Enjoy :)
 
 ## Run Tests
